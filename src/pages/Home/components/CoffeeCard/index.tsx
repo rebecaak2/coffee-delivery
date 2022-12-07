@@ -59,7 +59,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
         <TagsContainer>
           <TagsColor>
             {coffee.tags.map((tag) => (
-              <span key={`${tag}${tag}`}>{tag}</span>
+              <span key={`${tag}${tag}`}>{tag} </span>
             ))}
           </TagsColor>
         </TagsContainer>
