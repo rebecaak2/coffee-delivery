@@ -18,13 +18,6 @@ Durante este desafio, utilizamos conceitos um pouco mais avançados desenvolvend
 
 <br />
 
-<a href="https://coffee-delivery.vercel.app/" target="_blank">
-<img src="https://user-images.githubusercontent.com/71772559/178192066-d52e0cf7-906e-4baa-80f3-4b49dde153c0.png" />
-</a>
-
-<a href="https://youtu.be/TagcTdubxjg" target="_blank">
-<img src="https://user-images.githubusercontent.com/71772559/178192139-14eae3e0-490d-412d-a072-8f622f047d2c.png" />
-</a>
 
 <a href="/coffee-delivery" target="_blank">
 <img src="https://user-images.githubusercontent.com/71772559/178192378-234b9c46-7e31-47fb-8ddf-245617d8b198.png" />
