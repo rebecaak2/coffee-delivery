@@ -12,7 +12,9 @@ Durante este desafio, utilizamos conceitos um pouco mais avançados desenvolvend
 * Context API
 * React Router Dom
 * React Hook Form
-* Validações de formulário com Zod
+* Validações de formulário com yup
+* Api de cep
+* Git commit-conventional
 
 <br />
 
