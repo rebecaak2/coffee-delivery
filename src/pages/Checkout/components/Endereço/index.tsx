@@ -1,18 +1,13 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  Bank,
-  CreditCard,
-  CurrencyDollar,
-  MapPinLine,
-  Money,
-} from 'phosphor-react';
+import { MapPinLine } from 'phosphor-react';
 import * as yup from 'yup';
 
 import { useCart } from '../../../../hooks/useCart';
+import { FormaPagamento } from '../Pagamento/FormaPagamento';
 import {
   Container,
   Cards,
@@ -27,9 +22,6 @@ import {
   Bairro,
   Cidade,
   Uf,
-  Pagamento,
-  InformationPagamento,
-  Cartao,
 } from './styles';
 
 export interface EndereçoProps {
@@ -53,21 +45,11 @@ const schema = yup.object().shape({
   bairro: yup.string().required('Bairro obrigatório'),
   cidade: yup.string().required('Cidade obrigatório'),
   uf: yup.string().required('UF obrigatório'),
+  pagamento: yup.string().required('Pagamento obrigatório'),
 });
 
 export function Endereço() {
   const { clearCart } = useCart();
-  interface PagamentoProps {
-    cartao: boolean;
-    dinheiro: boolean;
-    cartaoDebito: boolean;
-  }
-
-  const [pagamento, setPagamento] = useState<PagamentoProps>({
-    cartao: false,
-    dinheiro: false,
-    cartaoDebito: false,
-  });
 
   const {
     register,
@@ -104,11 +86,19 @@ export function Endereço() {
 
   const navigate = useNavigate();
   function handleOnSubimit(data: EndereçoProps) {
-    console.log(data);
-
     // navegue para a página de sucesso passando os dados do endereço
     navigate('/success', { state: data });
     clearCart();
+  }
+
+  function setValuePagamento(pagamento: string) {
+    setValue('pagamento', pagamento, { shouldValidate: true });
+  }
+
+  function erros() {
+    if (errors.pagamento) {
+      return <p>{errors.pagamento.message}</p>;
+    }
   }
 
   return (
@@ -164,58 +154,7 @@ export function Endereço() {
           </ContainerRow>
         </Form>
       </Cards>
-      <Pagamento>
-        <ContainerRow>
-          <CurrencyDollar size={20} color="#8047f8" />
-          <InformationPagamento>
-            <span>Pagamento</span>
-            <p>
-              O pagamento é feito na entrega. Escolha a forma que deseja pagar
-            </p>
-          </InformationPagamento>
-        </ContainerRow>
-        <ContainerRow>
-          <Cartao
-            isActive={pagamento.cartao}
-            onClick={() =>
-              setPagamento({
-                cartao: !false,
-                dinheiro: false,
-                cartaoDebito: false,
-              })
-            }
-          >
-            <CreditCard size={20} color="#8047f8" />
-            <p>CARTÃO DE CRÉDITO</p>
-          </Cartao>
-          <Cartao
-            isActive={pagamento.cartaoDebito}
-            onClick={() =>
-              setPagamento({
-                cartao: false,
-                dinheiro: false,
-                cartaoDebito: !false,
-              })
-            }
-          >
-            <Bank size={20} color="#8047f8" />
-            <p>CARTÃO DE DEBITO</p>
-          </Cartao>
-          <Cartao
-            isActive={pagamento.dinheiro}
-            onClick={() =>
-              setPagamento({
-                cartao: false,
-                dinheiro: !false,
-                cartaoDebito: false,
-              })
-            }
-          >
-            <Money size={20} color="#8047f8" />
-            <p> DINHEIRO</p>
-          </Cartao>
-        </ContainerRow>
-      </Pagamento>
+      <FormaPagamento setValuePagamento={setValuePagamento} errors={erros()} />
     </Container>
   );
 }
