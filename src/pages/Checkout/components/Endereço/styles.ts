@@ -232,7 +232,13 @@ export const Pagamento = styled.div`
   padding: 2.5rem;
 
   width: 40rem;
-
+  p {
+    color: ${({ theme }) => theme.colors['base-error']};
+    font-size: 0.9375rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+    font-family: ${({ theme }) => theme.fonts.regular};
+  }
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   border-bottom-left-radius: 6px;
@@ -256,18 +262,19 @@ export const InformationPagamento = styled.div`
   }
 `;
 
-interface IContainer {
+interface ICartao {
   isActive: boolean;
 }
 
-export const Cartao = styled.button<IContainer>`
+export const Cartao = styled.button<ICartao>`
   align-items: center;
   display: flex;
   padding: 0.75rem;
   margin-bottom: 0.5rem;
+  justify-content: center;
   width: 178px;
   height: 2.625rem;
-  display: flex;
+
   cursor: pointer;
   border-radius: 4px;
   overflow: hidden;
@@ -280,22 +287,17 @@ export const Cartao = styled.button<IContainer>`
     color: ${(props) => props.theme.colors['base-label']};
   }
 
-  ${(props) =>
-    props.isActive &&
-    css`
-      background-color: ${props.theme.colors['brand-purple-light']};
-
-      border: 1px solid ${props.theme.colors['brand-purple-light']};
-    `}
-
-  &:focus-within {
-    border-color: ${(props) => props.theme.colors['brand-yellow-dark']};
-  }
-
   color: ${(props) => props.theme.colors['base-text']};
   &::placeholder {
     color: ${(props) => props.theme.colors['base-label']};
   }
+  ${(props) =>
+    props.isActive &&
+    css`
+      border-color: ${props.theme.colors['brand-purple-light']};
+      background-color: ${props.theme.colors['brand-purple-light']};
+    `}
+
   > p {
     color: ${(props) => props.theme.colors['base-text']};
     font-size: ${(props) => props.theme.textSizes['components-button-s']};
