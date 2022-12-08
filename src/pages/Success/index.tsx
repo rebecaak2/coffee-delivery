@@ -58,7 +58,7 @@ export function Success() {
             </BackgroundDolar>
             <OrderColumn>
               <p>Pagamento na entrega</p>
-              <span>Cartão de Crédito</span>
+              <span>{state.pagamento}</span>
             </OrderColumn>
           </OrderGroup>
         </OrderInfo>
