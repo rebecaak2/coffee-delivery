@@ -1,39 +1,28 @@
 import { useState } from 'react';
+import { FieldError } from 'react-hook-form';
 
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react';
 
 import {
-  Container,
   Pagamento,
   ContainerRow,
   InformationPagamento,
   Cartao,
+  Container,
 } from './styles';
-
-export const paymentMethods = {
-  credit: {
-    label: 'Cartão de crédito',
-  },
-  debit: {
-    label: 'Cartão de débito',
-  },
-  money: {
-    label: 'Dinheiro',
-  },
-};
 
 export interface PaymentMethodProps {
   label: string;
 }
 
 interface FormaPagamentoProps {
-  errors: string;
   setValuePagamento: (value: string) => void;
+  errorPagamento: FieldError | undefined;
 }
 
 export function FormaPagamento({
-  errors,
   setValuePagamento,
+  errorPagamento,
 }: FormaPagamentoProps) {
   const [isActive, setIsActive] = useState({
     credit: false,
@@ -57,6 +46,7 @@ export function FormaPagamento({
         break;
     }
   }
+
   return (
     <Container>
       <Pagamento>
@@ -92,7 +82,7 @@ export function FormaPagamento({
             <p> DINHEIRO</p>
           </Cartao>
         </ContainerRow>
-        {errors && <p>{errors}</p>}
+        {errorPagamento && <p>{errorPagamento.message}</p>}
       </Pagamento>
     </Container>
   );
