@@ -85,20 +85,22 @@ export function Endereço() {
   }, [cep, checkCep]);
 
   const navigate = useNavigate();
+
+  /**
+   * It navigates to the success page and clears the cart
+   * @param {EndereçoProps} data - EndereçoProps
+   */
   function handleOnSubimit(data: EndereçoProps) {
-    // navegue para a página de sucesso passando os dados do endereço
     navigate('/success', { state: data });
     clearCart();
   }
 
+  /**
+   * It sets the value of the pagamento state.
+   * @param {string} pagamento - The value of the input field.
+   */
   function setValuePagamento(pagamento: string) {
     setValue('pagamento', pagamento, { shouldValidate: true });
-  }
-
-  function erros() {
-    if (errors.pagamento) {
-      return <p>{errors.pagamento.message}</p>;
-    }
   }
 
   return (
@@ -154,7 +156,10 @@ export function Endereço() {
           </ContainerRow>
         </Form>
       </Cards>
-      <FormaPagamento setValuePagamento={setValuePagamento} errors={erros()} />
+      <FormaPagamento
+        setValuePagamento={setValuePagamento}
+        errorPagamento={errors.pagamento}
+      />
     </Container>
   );
 }
